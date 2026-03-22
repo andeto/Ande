@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .home-nav .spacer { flex: 1; }
+    .home-nav .spacer { display: none; }
 
     .home-hero {
       padding: 100px 32px 80px;
@@ -69,7 +69,7 @@
       gap: 24px;
       max-width: 820px;
       margin: 0 auto;
-      padding: 0 32px 64px;
+      padding: 0 32px 100px;
     }
 
     .subject-card {
@@ -189,71 +189,9 @@
     .home-footer .footer-left,
     .home-footer .footer-right { justify-content: center; }
 
-    /* About section */
-    .home-about {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 0 32px 100px;
-      border-top: 1px solid var(--border);
-    }
-    .home-about-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 40px;
-      padding-top: 48px;
-    }
-    .home-about-intro {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 36px;
-    }
-    .home-about h2 {
-      font-family: var(--serif);
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
-    .home-about p {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--ink-muted);
-      line-height: 1.7;
-    }
-    .home-about-principles {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .home-about-principle {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-    }
-    .principle-label {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 7px;
-    }
-    .principle-text {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--ink-muted);
-      line-height: 1.65;
-    }
-
     @media (max-width: 600px) {
       .subjects-grid { grid-template-columns: 1fr; padding: 0 20px 64px; }
       .home-hero { padding: 72px 24px 56px; }
-      .home-about-intro { grid-template-columns: 1fr; }
-      .home-about-principles { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -268,7 +206,7 @@
     <div class="home-hero">
       <div class="home-hero-label">Ars Numerorum Disciplinam Erudiendi</div>
       <h1>Wissen,<br>das <em>trägt</em>.</h1>
-      <p class="home-hero-sub">Ande vermittelt Schulfächer so, wie sie sein sollten – mit Verständnis statt Auswendiglernen, Herleitung statt bloßen Formeln.</p>
+      <p class="home-hero-sub">Ande vermittelt Themen nachhaltig. Mit Verständnis statt Auswendiglernen, Herleitung statt Formeln.</p>
     </div>
 
     <div class="home-divider"></div>
@@ -283,7 +221,7 @@
           <span class="subject-soon">Demnächst</span>
         </div>
         <div class="subject-name">Mathematik</div>
-        <div class="subject-desc">Von den Grundlagen der Algebra bis zur Analysis und Stochastik – Mathematik erklärt durch Intuition, Herleitung und Anwendung.</div>
+        <div class="subject-desc">Von den Grundlagen der Algebra über Analysis und Stochastik. Mathematik erklärt durch Intuition, Herleitung und Anwendung.</div>
         <div class="subject-topics">
           <span class="subject-topic">Algebra</span>
           <span class="subject-topic">Analysis</span>
@@ -300,7 +238,7 @@
           <span class="subject-soon">Demnächst</span>
         </div>
         <div class="subject-name">Ethik</div>
-        <div class="subject-desc">Grundfragen des guten Handelns, klassische und zeitgenössische Positionen – Ethik als Denkschule, nicht als Meinungssammlung.</div>
+        <div class="subject-desc">Grundfragen des bewerteten Handelns, klassische und zeitgenössische Positionen. Kritische Auseinandersetzung mit philosophischen Positionen.</div>
         <div class="subject-topics">
           <span class="subject-topic">Metaethik</span>
           <span class="subject-topic">Normative Ethik</span>
