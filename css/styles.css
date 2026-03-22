@@ -1,0 +1,1544 @@
+/* ============================================================
+   ANDE — styles.css
+   Sections:
+     1.  Variables & Reset
+     2.  Navigation
+     3.  Hero
+     4.  Curriculum layout
+     5.  Tag filter bar
+     6.  Area groups & sub-areas
+     7.  Topic cards & difficulty badges
+     8.  Lesson page (concept-view)
+     9.  Article body
+    10.  Interactive demo & bar chart
+    11.  Worked example
+    12.  Tasks & solutions
+    13.  Difficulty picker modal
+    14.  Footer
+    15.  Responsive
+   ============================================================ */
+
+
+/* ── 1. Variables & Reset ─────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:        #FAF8F3;
+  --ink:          #1A1A18;
+  --ink-muted:    #5A5A54;
+  --ink-faint:    #9A9A92;
+  --accent:       #C8521A;
+  --accent-light: #F5E8DF;
+  --teal:         #1A7A6A;
+  --teal-light:   #DFF0EB;
+  --blue:         #1A4A8A;
+  --blue-light:   #DDE8F5;
+  --border:       #E2DDD4;
+  --card:         #FFFFFF;
+  --serif:        'Lora', Georgia, serif;
+  --sans:         'DM Sans', system-ui, sans-serif;
+  --radius:       10px;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+.lesson-page .concept-view { flex: 1; }
+
+
+/* ── 2. Navigation ────────────────────────────────────────── */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
+  height: 56px;
+}
+
+.logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+nav .spacer { flex: 1; }
+
+nav a {
+  font-size: 13px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--accent);
+  color: white;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+  font-family: var(--sans);
+}
+
+.nav-cta:hover { opacity: 0.88; }
+
+
+/* ── 3. Hero ──────────────────────────────────────────────── */
+
+.hero {
+  padding: 80px 32px 64px;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+/* "Mathematik" — larger, dominant */
+.hero h1 > span:first-child {
+  display: block;
+  font-size: clamp(48px, 7vw, 72px);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+/* "einfach, präzise und verständlich." — subtitle weight */
+.hero-sub {
+  display: block;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 400;
+  color: var(--ink-muted);
+  letter-spacing: -0.3px;
+  line-height: 1;
+  margin-top: 10px;
+}
+
+.hero-sub em {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.hero p {
+  font-size: 17px;
+  color: var(--ink-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.1s;
+  font-family: var(--sans);
+  display: inline-block;
+}
+
+.btn-primary:hover  { opacity: 0.88; }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  transition: border-color 0.2s, background 0.2s;
+  font-family: var(--sans);
+}
+
+.btn-ghost:hover { border-color: var(--ink-muted); background: rgba(0,0,0,0.03); }
+
+.divider { border: none; border-top: 1px solid var(--border); }
+
+
+/* ── 4. Curriculum layout ─────────────────────────────────── */
+
+.curriculum {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 32px 80px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--ink-muted);
+  margin-bottom: 32px;
+  font-weight: 300;
+  max-width: 480px;
+}
+
+
+/* ── 5. Tag filter bar ────────────────────────────────────── */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.filter-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.15s;
+}
+
+.filter-btn:hover {
+  border-color: var(--ink-muted);
+  color: var(--ink);
+}
+
+.filter-btn.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+
+/* ── 6. Area groups & sub-areas ───────────────────────────── */
+
+.area-group {
+  margin-bottom: 64px;
+}
+
+.area-header {
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.area-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.area-desc {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-weight: 300;
+}
+
+.subarea-group {
+  margin-bottom: 32px;
+}
+
+.subarea-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+  padding-left: 2px;
+}
+
+
+/* ── 7. Topic cards & difficulty badges ───────────────────── */
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.topic-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.6;
+}
+
+/* Available lessons appear at full opacity */
+.topic-card.available { opacity: 1; }
+
+.topic-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.topic-card.available:hover {
+  border-color: var(--ink-muted);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.topic-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.topic-icon { font-size: 20px; }
+
+.topic-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.topic-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+
+.topic-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: var(--tag-bg, #F0EDE5);
+  color: var(--tag-color, var(--ink-muted));
+}
+
+.difficulty-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+.diff-0 { background: #DFF0EB; color: #1A7A6A; }
+.diff-1 { background: #FFF3DC; color: #9A6200; }
+.diff-2 { background: #FDEAEA; color: #A32020; }
+
+
+/* ── 8. Lesson page (concept-view) ───────────────────────── */
+
+.lesson-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.concept-view {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  width: 100%;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-bottom: 40px;
+}
+
+.breadcrumb-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.breadcrumb-link:hover { text-decoration: underline; }
+.breadcrumb span { color: var(--ink-faint); }
+
+.concept-header { margin-bottom: 40px; }
+
+.topic-tag-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.concept-header h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.concept-header .lead {
+  font-size: 17px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.concept-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-prev, .btn-next {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.btn-prev {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink-muted);
+  text-align: left;
+}
+
+.btn-prev:hover { border-color: var(--ink-muted); color: var(--ink); }
+
+.btn-next {
+  background: var(--accent);
+  border: 1px solid transparent;
+  color: white;
+  text-align: right;
+}
+
+.btn-next:hover { opacity: 0.88; }
+
+
+/* ── 9. Article body ──────────────────────────────────────── */
+
+.article {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.article h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 48px 0 16px;
+  letter-spacing: -0.3px;
+}
+
+.article p {
+  margin-bottom: 20px;
+  color: var(--ink);
+  font-weight: 300;
+}
+
+.article strong { font-weight: 500; }
+
+.callout {
+  background: var(--blue-light);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 16px 20px;
+  margin: 28px 0;
+  font-size: 15px;
+  color: var(--blue);
+  font-weight: 300;
+}
+
+.callout strong { font-weight: 500; color: var(--blue); }
+
+.intuition-box {
+  background: var(--accent-light);
+  border: 1px solid #E8C5B0;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 28px 0;
+}
+
+.intuition-box .ib-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.intuition-box p {
+  font-size: 15px;
+  color: #7A3A1A;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.math-block {
+  background: #F5F3EE;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 8px 0;
+  letter-spacing: 0.5px;
+}
+
+/* MathJax-rendered display math inside lesson body */
+.math-block-display {
+  margin: 20px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+
+/* ── 10. Interactive demo & bar chart ─────────────────────── */
+
+.demo-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin: 36px 0;
+}
+
+.demo-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.demo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.demo-row label {
+  font-size: 13px;
+  color: var(--ink-muted);
+  min-width: 80px;
+  font-weight: 400;
+}
+
+.demo-row input[type="range"] {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--teal);
+}
+
+.demo-row .val {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 44px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-display {
+  background: var(--teal-light);
+  border: 1px solid #A8D8CE;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.result-display .label  { font-size: 13px; color: var(--teal); font-weight: 400; }
+.result-display .number { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--teal); }
+.result-display .unit   { font-size: 13px; color: var(--teal); opacity: 0.7; }
+
+/* Bar chart total height = CHART_H(110) + MIN_BASE_H(6) + label(14) + gap(8) = 138px */
+.bar-chart-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 138px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.bar-chart-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 14px; left: 0; right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bar-inner { width: 100%; transition: height 0.4s cubic-bezier(.4,0,.2,1); }
+.bar-growth { border-radius: 2px 2px 0 0; }
+.bar-base   { border-radius: 0; }
+.bar-base   { background: var(--blue-light); border: 1px solid #B0C8E8; }
+.bar-growth { background: var(--teal-light); border: 1px solid #A8D8CE; }
+
+.bar-year {
+  font-size: 9px;
+  color: var(--ink-faint);
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+
+/* ── 11. Worked example ───────────────────────────────────── */
+
+.worked-example {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 36px 0;
+}
+
+.we-header {
+  background: #F5F3EE;
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.we-body { padding: 20px 24px; }
+
+.we-step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.we-step:last-child { margin-bottom: 0; }
+
+.we-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.we-content { flex: 1; }
+
+.we-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.we-text {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+
+/* ── 12. Tasks & solutions ────────────────────────────────── */
+
+.tasks-section {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 2px solid var(--border);
+}
+
+.tasks-heading {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+}
+
+.task-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.task-number {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.task-question {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.task-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.15s;
+}
+
+.task-toggle:hover {
+  border-color: var(--ink-muted);
+  color: var(--ink);
+}
+
+.task-solution {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.solution-step {
+  margin-bottom: 12px;
+}
+
+.solution-step:last-child { margin-bottom: 0; }
+
+.solution-step p {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+
+/* ── 13. Difficulty picker modal ──────────────────────────── */
+
+.diff-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,24,0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.diff-overlay.active { display: flex; }
+
+.diff-modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 40px;
+  text-align: center;
+  min-width: 280px;
+  animation: modal-in 0.18s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.diff-prompt {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 24px;
+  letter-spacing: -0.3px;
+}
+
+.diff-options { display: flex; gap: 10px; justify-content: center; }
+
+.diff-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--sans);
+  border: 1.5px solid transparent;
+  transition: transform 0.1s, opacity 0.15s;
+}
+
+.diff-btn:active { transform: scale(0.97); }
+.diff-btn-0 { background: #DFF0EB; color: #1A7A6A; border-color: #A8D8CE; }
+.diff-btn-0:hover { opacity: 0.85; }
+.diff-btn-1 { background: #FFF3DC; color: #9A6200; border-color: #F5D98A; }
+.diff-btn-1:hover { opacity: 0.85; }
+.diff-btn-2 { background: #FDEAEA; color: #A32020; border-color: #F5AAAA; }
+.diff-btn-2:hover { opacity: 0.85; }
+
+
+/* ── 14. Footer ───────────────────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-left { display: flex; align-items: baseline; gap: 12px; }
+
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  text-decoration: none;
+}
+
+.footer-full {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.footer-right a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+.footer-right a:hover { color: var(--ink); }
+
+
+/* ── 16. Static pages (About, Materials) ──────────────────── */
+
+.static-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 32px 80px;
+}
+
+.static-header {
+  margin-bottom: 48px;
+}
+
+.static-title {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.static-lead {
+  font-size: 17px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.static-body h2 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 44px 0 14px;
+  letter-spacing: -0.3px;
+}
+
+.static-body p {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.static-body p:last-child { margin-bottom: 0; }
+
+.inline-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.inline-link:hover { text-decoration: underline; }
+
+/* About principles box */
+.about-callout {
+  background: var(--accent-light);
+  border: 1px solid #E8C5B0;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 36px 0;
+}
+
+.about-callout-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.about-principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+}
+
+.about-principle { }
+
+.principle-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.principle-text {
+  font-size: 13px;
+  color: #7A3A1A;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Materials page sections */
+.mat-section { margin-bottom: 0; }
+
+.mat-section-header { margin-bottom: 28px; }
+
+.mat-section-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.mat-section-sub {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  max-width: 520px;
+}
+
+/* Terms grid */
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.term-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+
+.term-area-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.term-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.term-body {
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* Formula list */
+.formula-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formula-group-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.formula-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.formula-item:last-child { margin-bottom: 0; }
+.formula-item:hover { border-color: var(--ink-muted); }
+.formula-item.formula-open {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.formula-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+}
+
+/* Formula name — left column, fixed width */
+.formula-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 190px;
+  flex-shrink: 0;
+}
+
+/* For "list" formulas (no single representative expression),
+   show a muted hint instead of a formula preview */
+.formula-expr {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink);
+  overflow-x: auto;
+  line-height: 1.4;
+}
+
+.formula-expr.is-list {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.formula-chevron {
+  font-size: 20px;
+  color: var(--ink-faint);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Detail panel */
+.formula-detail {
+  padding: 20px 20px 20px;
+  border-top: 1px solid var(--border);
+  background: #FDFCFA;
+}
+
+.formula-detail p {
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.formula-detail p:last-child { margin-bottom: 0; }
+
+.formula-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formula-detail-list:last-child { margin-bottom: 0; }
+
+.formula-detail-list li {
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  padding: 6px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+/* MathJax centering in detail panel */
+.formula-detail .MathJax,
+.formula-detail mjx-container { display: block; margin: 12px auto; text-align: center; }
+
+/* Terms empty state */
+.terms-empty {
+  font-size: 14px;
+  color: var(--ink-faint);
+  font-weight: 300;
+  padding: 24px 0;
+  grid-column: 1 / -1;
+}
+
+/* Materials page two-column layout */
+.materials-layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  gap: 48px;
+}
+
+.mat-main {
+  flex: 1;
+  min-width: 0;
+  padding: 56px 0 80px;
+}
+
+.mat-page-header { margin-bottom: 0; }
+
+/* Sticky table of contents */
+.mat-toc {
+  width: 160px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 88px;
+  padding-top: 56px;
+}
+
+.mat-toc-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+
+.mat-toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mat-toc-link {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 5px 10px 5px 12px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1.4;
+  display: block;
+}
+
+.mat-toc-link:hover {
+  color: var(--ink);
+  background: rgba(0,0,0,0.03);
+}
+
+.mat-toc-link.active {
+  color: var(--accent);
+  font-weight: 500;
+  background: var(--accent-light);
+}
+
+/* Search + filter row — shared by Begriffe, Formelsammlung, and Lehrplan */
+.begriffe-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 360px;
+  padding: 6px 14px 6px 32px;
+  font-size: 12px;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search-input::placeholder { color: var(--ink-faint); }
+.search-input:focus { border-color: var(--ink-muted); }
+
+
+/* ── 17. Area showcase (home page) ───────────────────────── */
+
+.area-showcase {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 32px 80px;
+}
+
+/* Title on one line, subtitle on next */
+.showcase-header {
+  margin-bottom: 32px;
+}
+
+.showcase-header .section-title { margin-bottom: 6px; }
+.showcase-header .section-sub   { margin-bottom: 0; max-width: none; white-space: nowrap; }
+
+.area-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 40px;
+}
+
+.area-card {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.area-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border-color: var(--ac, var(--accent));
+}
+
+/* Left accent strip + large symbol */
+.area-card-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  flex-shrink: 0;
+  background: var(--ac-light, #F5E8DF);
+  color: var(--ac, var(--accent));
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  border-right: 1px solid var(--border);
+  /* Left accent bar */
+  box-shadow: inset 4px 0 0 var(--ac, var(--accent));
+}
+
+.area-card-body {
+  flex: 1;
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.area-card-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+
+.area-card-desc {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+.area-card-topics {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.area-card-topics span {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--ac-light, #F5E8DF);
+  color: var(--ac, var(--accent));
+}
+
+
+/* ── 19. Begriffe pagination ──────────────────────────────── */
+
+.begriffe-pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--ink-muted);
+  color: var(--ink);
+  background: rgba(0,0,0,0.03);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.page-indicator {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-weight: 400;
+  min-width: 32px;
+  text-align: center;
+}
+
+
+/* ── 20. Responsive ───────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .topic-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  nav                { padding: 0 16px; gap: 12px; }
+  nav a              { display: none; }
+  .hero              { padding: 48px 20px 40px; }
+  .curriculum        { padding: 40px 20px 60px; }
+  .area-showcase     { padding: 40px 20px 60px; }
+  .static-page       { padding: 40px 20px 60px; }
+  .concept-view      { padding: 32px 20px 60px; }
+  .materials-layout  { flex-direction: column; padding: 0 20px; gap: 0; }
+  .mat-toc           { display: none; }
+  .mat-main          { padding: 40px 0 60px; }
+  .hero h1 > span:first-child { font-size: 40px; }
+  .section-title     { font-size: 24px; }
+  .static-title      { font-size: 30px; }
+  .concept-header h1 { font-size: 30px; }
+  .area-header       { flex-direction: column; gap: 4px; }
+  .area-card-symbol  { width: 64px; font-size: 24px; }
+  .area-card-body    { padding: 16px 18px; }
+  .topic-grid        { grid-template-columns: 1fr; }
+  .terms-grid        { grid-template-columns: 1fr; }
+  .begriffe-pagination { margin-left: 0; }
+  .about-principles  { grid-template-columns: 1fr; }
+  .formula-row       { flex-wrap: wrap; gap: 8px; }
+  .formula-name      { min-width: unset; }
+  .diff-options      { flex-direction: column; }
+  .diff-modal        { padding: 28px 24px; min-width: unset; width: 88vw; }
+  .footer-inner      { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .concept-nav       { flex-direction: column; }
+}
